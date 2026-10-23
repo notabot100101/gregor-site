@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muster GmbH (Demo) — Event- & IT-Dienstleister, Vogtland</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --fg: #e0e0e0;
+  --accent: #00d4ff;
+  --accent2: #7ee8fa;
+  --card: rgba(255,255,255,0.05);
+  --muted: #888;
+}
+
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --fg: #1a1a2e;
+  --accent: #0066cc;
+  --accent2: #0099dd;
+  --card: rgba(0,0,0,0.05);
+  --muted: #666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+.controls {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  z-index: 100;
+}
+
+.badge {
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+}
+
+.btn-icon {
+  background: var(--card);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover { background: var(--accent); color: var(--bg); }
+
+.slide {
+  display: none;
+  min-height: 100vh;
+  padding: 4rem 1.5rem 5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+.slide.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { font-size: 2rem; margin-bottom: 0.4rem; color: var(--accent); }
+.subtitle { font-size: 1.15rem; color: var(--accent2); margin-bottom: 1rem; }
+h2 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--accent2); }
+p { font-size: 1.1rem; line-height: 1.6; max-width: 420px; margin-bottom: 1rem; }
+.icon { font-size: 4rem; margin-bottom: 1rem; }
+.small { font-size: 0.85rem; color: var(--muted); }
+.highlight { color: var(--accent); font-weight: bold; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 420px; margin: 1.2rem auto; }
+.card { background: var(--card); border-radius: 12px; padding: 1rem; text-align: left; transition: background 0.3s; }
+.card .emoji { font-size: 1.6rem; }
+.card .title { font-size: 0.95rem; font-weight: bold; color: var(--accent2); margin-top: 0.4rem; }
+.card .text { font-size: 0.82rem; margin-top: 0.4rem; color: var(--fg); opacity: 0.9; line-height: 1.45; }
+
+.quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--accent2);
+  max-width: 440px;
+  line-height: 1.6;
+  margin: 1rem auto 1.5rem;
+  padding: 1.2rem 1.5rem;
+  border-left: 4px solid var(--accent);
+  background: var(--card);
+  border-radius: 0 12px 12px 0;
+  text-align: left;
+}
+
+.contact-box {
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  max-width: 420px;
+  margin: 1rem auto;
+  text-align: left;
+}
+.contact-box .line { font-size: 1.02rem; margin-bottom: 0.5rem; color: var(--fg); }
+.contact-box .line .k { color: var(--accent2); font-weight: bold; }
+
+.nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+}
+[data-theme="light"] .nav { background: rgba(255,255,255,0.9); }
+.btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.3; }
+.dots { display: flex; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #333; transition: background 0.3s; }
+[data-theme="light"] .dot { background: #ccc; }
+.dot.active { background: var(--accent); }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <span class="badge">Demo</span>
+  <button class="btn-icon" onclick="toggleTheme()" title="Hell/Dunkel">🌓</button>
+</div>
+
+<div class="slide active" data-slide="1">
+  <div class="icon">🏢</div>
+  <h1>Muster GmbH <span class="small">(Platzhalter)</span></h1>
+  <div class="subtitle">Event- &amp; IT-Dienstleister aus dem Vogtland</div>
+  <p>Veranstaltungs- und IT-Service aus einer Hand — für Unternehmen, die zuverlässige Technik, persönliche Betreuung und ein starkes regionales Netzwerk schätzen.</p>
+  <p class="small">Demo-Seite · Wischen oder klicken →</p>
+</div>
+
+<div class="slide" data-slide="2">
+  <div class="icon">🛠️</div>
+  <h2>Unsere Leistungen</h2>
+  <p>Praxiserprobte Services für Unternehmen verschiedenster Branchen:</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="emoji">🤖</div>
+      <div class="title">KI-Implementierung</div>
+      <div class="text">Praktische Einführung und Umsetzung von KI-Lösungen für Businesskunden — vom Konzept bis zum laufenden Betrieb.</div>
+    </div>
+    <div class="card">
+      <div class="emoji">🌐</div>
+      <div class="title">Netzwerkinfrastruktur</div>
+      <div class="text">Installation und Wartung moderner Netzwerkinfrastruktur — sicher, skalierbar und auf Ihre Anforderungen zugeschnitten.</div>
+    </div>
+    <div class="card">
+      <div class="emoji">📞</div>
+      <div class="title">Supportwesen</div>
+      <div class="text">Betreuung verschiedenster Branchen im Supportwesen — kompetent, verlässlich und serviceorientiert.</div>
+    </div>
+    <div class="card">
+      <div class="emoji">📅</div>
+      <div class="title">Event-Technik</div>
+      <div class="text">Professionelle Veranstaltungstechnik und -dienstleistung für Ihre Events — zum Beispiel im Rahmen Ihrer Veranstaltungen.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="3">
+  <div class="icon">📍</div>
+  <h2>Regional verwurzelt</h2>
+  <div class="quote">
+    „Regionale Talente zu finden und gemäß gängiger Richtlinien zu fordern — und zu fördern.“
+  </div>
+  <p>Als Unternehmen aus dem Vogtland setzen wir auf Fachkräfte aus der Region. Wir fördern sie mit klaren Standards, fairer Zusammenarbeit und langfristiger Begleitung.</p>
+  <p class="small">Formulierung aus den Gesprächsnotizen — Platzhalter für den finalen Text.</p>
+</div>
+
+<div class="slide" data-slide="4">
+  <div class="icon">✉️</div>
+  <h2>Kontakt</h2>
+  <p>Sie möchten mehr erfahren oder ein unverbindliches Gespräch vereinbaren? Wir freuen uns auf Ihre Anfrage.</p>
+  <div class="contact-box">
+    <div class="line"><span class="k">Firma:</span> Muster GmbH (Platzhalter)</div>
+    <div class="line"><span class="k">E-Mail:</span> kontakt@beispiel.de (Platzhalter)</div>
+    <div class="line"><span class="k">Region:</span> Vogtland, Sachsen</div>
+  </div>
+  <p class="small">Demo-Seite — Firmen- und Kontaktdaten sind Platzhalter und werden vor Veröffentlichung ersetzt.</p>
+</div>
+
+<div class="nav">
+  <button class="btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
+
+<script>
+let current = 1;
+const total = 4;
+let touchStart = 0;
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  const target = document.querySelector('[data-slide="' + n + '"]');
+  if (target) target.classList.add('active');
+
+  document.getElementById('prevBtn').disabled = (n === 1);
+  document.getElementById('nextBtn').disabled = (n === total);
+
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i + 1 === n);
+  });
+}
+
+function changeSlide(dir) {
+  current += dir;
+  if (current < 1) current = 1;
+  if (current > total) current = total;
+  showSlide(current);
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+}
+
+document.addEventListener('touchstart', e => { touchStart = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => {
+  let touchEnd = e.changedTouches[0].screenX;
+  if (touchStart - touchEnd > 50) changeSlide(1);
+  if (touchEnd - touchStart > 50) changeSlide(-1);
+});
+
+for (let i = 1; i <= total; i++) {
+  let dot = document.createElement('div');
+  dot.className = 'dot' + (i === 1 ? ' active' : '');
+  document.getElementById('dots').appendChild(dot);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') changeSlide(1);
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+});
+
+showSlide(1);
+</script>
+</body>
+</html>
